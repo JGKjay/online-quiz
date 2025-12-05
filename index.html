@@ -102,7 +102,7 @@ function showResult() {
 }
 
 function sendEmail() {
-  emailjs.send("service_gnb4svs", "__ejs-test-mail-service__", {
+  emailjs.send("service_gnb4svs", {
     student_name: student,
     student_score: score
   });
