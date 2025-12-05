@@ -4,7 +4,8 @@
   <title>Online Quiz</title>
 
   <!-- EmailJS Library -->
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
 
   <style>
     body {
@@ -41,7 +42,9 @@
 
 <script>
 /* ✅ YOUR EMAILJS KEYS (ALREADY CONNECTED) */
-emailjs.init("vozyFgmm1cLmdvas6");
+emailjs.init({
+  publicKey: "vozyFgmm1cLmdvas6",
+});
 
 let student = "";
 let index = 0;
