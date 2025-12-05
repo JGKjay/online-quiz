@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Student Quiz</title>
+  <title>Online Quiz</title>
+
+  <!-- EmailJS Library -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
 
   <style>
@@ -14,15 +16,17 @@
     .box {
       background: white;
       padding: 25px;
-      width: 400px;
+      width: 350px;
       margin: auto;
       border-radius: 10px;
       box-shadow: 0 0 10px gray;
     }
     input, button {
       padding: 10px;
-      width: 80%;
+      width: 90%;
       margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -36,12 +40,14 @@
 </div>
 
 <script>
-emailjs.init("YOUR_PUBLIC_KEY");  // 🔴 I will update this later
+/* ✅ YOUR EMAILJS KEYS (ALREADY CONNECTED) */
+emailjs.init("vozyFgmm1cLmdvas6");
 
 let student = "";
 let index = 0;
 let score = 0;
 
+/* ✅ QUIZ QUESTIONS (YOU CAN CHANGE THESE) */
 const questions = [
   {
     q: "2 + 2 = ?",
@@ -55,13 +61,18 @@ const questions = [
   },
   {
     q: "5 x 3 = ?",
-    options: ["10", "20", "15", "25"],
+    options: ["10", "15", "20", "25"],
+    ans: 1
+  },
+  {
+    q: "Which is a programming language?",
+    options: ["HTML", "CSS", "JavaScript", "Photoshop"],
     ans: 2
   }
 ];
 
 function startQuiz() {
-  student = document.getElementById("studentName").value;
+  student = document.getElementById("studentName").value.trim();
   if (student === "") {
     alert("Please enter your full name");
     return;
@@ -71,7 +82,8 @@ function startQuiz() {
 
 function showQuestion() {
   let q = questions[index];
-  let html = `<h2>${q.q}</h2>`;
+  let html = `<h3>Question ${index + 1} of ${questions.length}</h3>`;
+  html += `<h2>${q.q}</h2>`;
 
   q.options.forEach((opt, i) => {
     html += `<button onclick="checkAnswer(${i})">${opt}</button><br>`;
@@ -81,7 +93,10 @@ function showQuestion() {
 }
 
 function checkAnswer(selected) {
-  if (selected === questions[index].ans) score++;
+  if (selected === questions[index].ans) {
+    score++;
+  }
+
   index++;
 
   if (index < questions.length) {
@@ -96,15 +111,20 @@ function showResult() {
     <h2>Quiz Completed ✅</h2>
     <h3>Name: ${student}</h3>
     <h3>Score: ${score} / ${questions.length}</h3>
+    <h4>Thank You!</h4>
   `;
 
   sendEmail();
 }
 
 function sendEmail() {
-  emailjs.send("service_gnb4svs", {
+  emailjs.send("service_gnb4svs", "template_3vyah5i", {
     student_name: student,
     student_score: score
+  }).then(function () {
+    console.log("✅ Email sent to Jay successfully!");
+  }, function (error) {
+    console.log("❌ Email failed:", error);
   });
 }
 </script>
