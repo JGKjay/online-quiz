@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Online Quiz</title>
-
-  <!-- EmailJS Library -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
-
+  <title>Student Quiz System</title>
   <style>
     body {
       font-family: Arial;
       background: #f4f4f4;
       text-align: center;
-      padding: 50px;
+      padding: 40px;
     }
     .box {
       background: white;
@@ -29,28 +24,34 @@
       font-size: 16px;
       cursor: pointer;
     }
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+    }
   </style>
 </head>
 
 <body>
 
 <div class="box" id="mainBox">
-  <h2>Enter Your Full Name</h2>
-  <input type="text" id="studentName" placeholder="Full Name">
-  <button onclick="startQuiz()">Start Quiz</button>
+  <h2>Online Quiz System</h2>
+  <button onclick="studentPage()">Start Quiz (Student)</button>
+  <button onclick="adminLogin()">Admin Login</button>
 </div>
 
 <script>
-/* ✅ YOUR EMAILJS KEYS (ALREADY CONNECTED) */
-emailjs.init({
-  publicKey: "vozyFgmm1cLmdvas6",
-});
+const ADMIN_PASSWORD = "0987654321";
 
-let student = "";
+let studentName = "";
 let index = 0;
 let score = 0;
 
-/* ✅ QUIZ QUESTIONS (YOU CAN CHANGE THESE) */
+/* ✅ QUIZ QUESTIONS */
 const questions = [
   {
     q: "2 + 2 = ?",
@@ -74,12 +75,24 @@ const questions = [
   }
 ];
 
+/* ✅ STUDENT SECTION */
+
+function studentPage() {
+  document.getElementById("mainBox").innerHTML = `
+    <h2>Enter Your Full Name</h2>
+    <input type="text" id="nameInput" placeholder="Full Name">
+    <button onclick="startQuiz()">Start Quiz</button>
+  `;
+}
+
 function startQuiz() {
-  student = document.getElementById("studentName").value.trim();
-  if (student === "") {
-    alert("Please enter your full name");
+  studentName = document.getElementById("nameInput").value.trim();
+  if (studentName === "") {
+    alert("Please enter your name");
     return;
   }
+  index = 0;
+  score = 0;
   showQuestion();
 }
 
@@ -99,12 +112,12 @@ function checkAnswer(selected) {
   if (selected === questions[index].ans) {
     score++;
   }
-
   index++;
 
   if (index < questions.length) {
     showQuestion();
   } else {
+    saveResult();
     showResult();
   }
 }
@@ -112,23 +125,76 @@ function checkAnswer(selected) {
 function showResult() {
   document.getElementById("mainBox").innerHTML = `
     <h2>Quiz Completed ✅</h2>
-    <h3>Name: ${student}</h3>
+    <h3>Name: ${studentName}</h3>
     <h3>Score: ${score} / ${questions.length}</h3>
-    <h4>Thank You!</h4>
+    <button onclick="location.reload()">Go Home</button>
   `;
-
-  sendEmail();
 }
 
-function sendEmail() {
-  emailjs.send("service_gnb4svs", "template_3vyah5i", {
-    student_name: student,
-    student_score: score
-  }).then(function () {
-    console.log("✅ Email sent to Jay successfully!");
-  }, function (error) {
-    console.log("❌ Email failed:", error);
+function saveResult() {
+  let results = JSON.parse(localStorage.getItem("quizResults")) || [];
+  results.push({ name: studentName, score: score });
+  localStorage.setItem("quizResults", JSON.stringify(results));
+}
+
+/* ✅ ADMIN SECTION */
+
+function adminLogin() {
+  document.getElementById("mainBox").innerHTML = `
+    <h2>Admin Login</h2>
+    <input type="password" id="adminPass" placeholder="Enter Password">
+    <button onclick="verifyAdmin()">Login</button>
+  `;
+}
+
+function verifyAdmin() {
+  let pass = document.getElementById("adminPass").value;
+  if (pass !== ADMIN_PASSWORD) {
+    alert("Wrong Password!");
+    return;
+  }
+  showAdminPanel();
+}
+
+function showAdminPanel() {
+  let results = JSON.parse(localStorage.getItem("quizResults")) || [];
+
+  let html = `<h2>Admin Panel</h2>
+              <button onclick="downloadExcel()">Download Excel</button>
+              <button onclick="location.reload()">Logout</button>
+              <table>
+              <tr><th>Student Name</th><th>Score</th></tr>`;
+
+  results.forEach(r => {
+    html += `<tr><td>${r.name}</td><td>${r.score}</td></tr>`;
   });
+
+  html += `</table>`;
+
+  document.getElementById("mainBox").innerHTML = html;
+}
+
+/* ✅ EXCEL DOWNLOAD (CSV) */
+
+function downloadExcel() {
+  let results = JSON.parse(localStorage.getItem("quizResults")) || [];
+  if (results.length === 0) {
+    alert("No student data found");
+    return;
+  }
+
+  let csv = "Student Name,Score\n";
+  results.forEach(r => {
+    csv += `${r.name},${r.score}\n`;
+  });
+
+  let blob = new Blob([csv], { type: "text/csv" });
+  let url = URL.createObjectURL(blob);
+
+  let a = document.createElement("a");
+  a.href = url;
+  a.download = "quiz_results.csv";
+  a.click();
 }
 </script>
 
