@@ -54,70 +54,71 @@ let score = 0;
 /* ✅ YOUR 13 BILINGUAL QUESTIONS */
 const questions = [
 {
-q:"1. Fine pitch size of hacksaw blade? | हैकसॉ ब्लेडचा महीन पिच आकार काय आहे?",
+q:"1.What is the fine pitch size of hacksaw blade? | हैकसॉ ब्लेड का महीन पिच आकार क्या है?",
 options:["0.5 mm","0.6 mm","0.7 mm","0.8 mm"],
 ans:3
 },
 {
-q:"2. Other name of gilbow shear? | गिलबो शियरचे दुसरे नाव काय आहे?",
-options:["Block shear","Scotch shear","Rhodes shear","Universal combination shear"],
+q:"What is the other name of gilbow shear? | गिलबो शियर का दूसरा नाम क्या है?",
+options:["Block shear | ब्लॉक शियर","Scotch shear | स्कॉच शियर","Rhodes shear | हर्होड्स शियर","Universal combination shear | यूनिवर्सल संयोजन शियर"],
 ans:3
 },
 {
-q:"3. Material for mallets? | मेलेट कोणत्या साहित्यापासून बनवतात?",
-options:["Brass","Copper","Hard wood","Aluminium"],
+q:"3. Which material is used for making mallets? | मेलेट बनाने के लिए किस सामग्री का उपयोग किया जाता है?",
+options:["Brass | पीतल","Copper | तांबा","Hard wood | कठोर लकड़ी","Aluminium | अल्युमीनियम"],
 ans:2
 },
 {
-q:"4. Material for chisels & files? | छेनी व फाइलसाठी कोणते साहित्य?",
-options:["Stainless steel","Low carbon steel","High carbon steel","Medium carbon steel"],
+q:"4. Which material is used to make chisels, files, scribers and axe? | छेनी, फाइल, स्क्राइबर्स और कुल्हाड़ी बनाने के लिए किस सामग्री का उपयोग किया जाता है?",
+options:["Stainless steel | स्टेनलेस स्टील","Low carbon steel | निम्न कार्बन इस्पात","High carbon steel | उच्च कार्बन इस्पात","Medium carbon steel | मध्यम कार्बन इस्पात"],
 ans:2
 },
 {
-q:"5. HSS steel element? | HSS स्टीलसाठी वापरले जाणारे घटक?",
-options:["Nickel","Tungsten","Chromium","Manganese"],
+q:"5.Which material is used to produce high speed steel along with chromium, vanadium and molybdenum? | क्रोमियम, वैनेडियम और मोलिब्डेनम के साथ उच्च गति वाले स्टील के उत्पादन के लिए किस सामग्री का उपयोग किया जाता है?",
+options:["Nickel | निकल","Tungsten | टंगस्टन","Chromium | क्रोमियम","Manganese | मैगनीज "],
 ans:1
 },
 {
-q:"6. Property that carries heat & electricity? | उष्णता व वीज वाहून नेणारा गुण?",
-options:["Tenacity","Elasticity","Machinability","Conductivity"],
+q:"6. Which physical property of metal that carry heat and electricity? | धातु का कौन सा भौतिक गुण जो गर्मी और बिजली का प्रवाह करते है?",
+options:["Tenacity | दृढ़ता","Elasticity | लोच","Machinablity | मशीनन क्षमता","Conductivity | प्रवाहकत्त्व "],
 ans:3
 },
 {
-q:"7. Cheapest sheet metal? | सर्वात स्वस्त शीट मेटल?",
-options:["Copper","Stainless steel","Black iron","Galvanised iron"],
+q:"7. Which is the cheapest sheet metal used for sheet metal work? | शीट मेटल वर्क के लिए सबसे सस्ती शीट मेटल का उपयोग किसके लिए किया जाता है?",
+options:["Copper sheet | ताम्र चादर","Stainless steel sheet | स्टेनलेस स्टील चादर","Black iron sheet | काले लोहे की चादर","Galvanised iron sheet | जस्ती लोहे की चादर"],
 ans:2
 },
 {
-q:"8. Household & airplane metal? | घरगुती व विमानासाठी साहित्य?",
-options:["Lead","Tinned","Copper","Aluminium"],
+q:"8. Which material is used to make house hold appliances, lighting fixtures and aeroplane construction etc.? | हाउस होल्ड इक्विपमेंट, लाइटिंग फिक्स्चर और हवाई जहाज निर्माण आदि के लिए किस सामग्री का उपयोग किया जाता है?",
+options:["Lead sheets | लीड चादर","Tinned plates | टीन की चादर","Copper sheets | तांबे की चादर","Aluminium sheets | एल्युमिनियम चादर "],
 ans:1
 },
 {
-q:"9. Designation of steel flats? | स्टील फ्लॅट्सचा संकेत?",
+q:"9. How the Indian standard hot rolled steel flats are designated? | भारतीय मानक हॉट रोल्ड स्टील प्लेट्स को कैसे निर्दिष्ट किया जाता है?",
 options:["ISF","ISHF","ISSF","ISFS"],
 ans:0
 },
 {
-q:"10. PVC full form? | PVC चे पूर्ण रूप?",
-options:["Poly Vinyl Carbon","Poly Vinyl Chloric","Poly Vinyl Chloride","Plastic Vinyl Chloride"],
+q:"10. What is the expansion of PVC? | पीवीसी का विस्तार क्या है?",
+options:["Poly Vinyl Carbon | पॉली विनाइल कार्बन","Poly Vinyl Chloric | पाली विनाइल क्लोरिक","Poly Vinyl Chloride | पोलीविनाइल क्लोराइड","Plastic Vinyl Chloride | प्लास्टिक विनाइल क्लोराइड"],
 ans:0
 },
 {
-q:"11. Tougher than GI sheet? | GI पेक्षा जास्त मजबूत शीट?",
-options:["Lead","Copper","Galvanised","Stainless steel"],
+q:"11. Which metal sheet is tougher than G.I sheet? | कौन सी धातु की शीट जी. आई. शीट से अधिक कठोर है?",
+options:["Lead sheet | लीड चादर","Copper sheet | ताम्र चादर","Galvanised sheet | जस्ता चादर","Stainless steel sheet | स्टेनलेस स्टील चादर "],
 ans:3
 },
 {
-q:"12. Water heater metal? | वॉटर हीटरसाठी धातू?",
+q:"12. Which metal is used to make water heating apparatus? | जल तापन उपकरण बनाने के लिए किस धातु का उपयोग किया जाता है?",
 options:["Lead","Brass","Copper","Aluminium"],
 ans:2
 },
 {
-q:"13. Acid tank sheet? | ॲसिड टाकीसाठी शीट?",
+q:"13. Which metal sheet is used for making acid tanks? | एसिड टैंक बनाने के लिए किस धातु की शीट का उपयोग किया जाता है?",
 options:["Lead","Tinned","Copper","Stainless steel"],
 ans:3
 }
+
 ];
 
 /* ✅ STUDENT SECTION */
